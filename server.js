@@ -1,10 +1,21 @@
-import app from './src/app.js'
+import db from './src/config/db.js'
+import app from './src/middleware.js'
 
+const port  = process.env.PORT || 5000
 
+db.connect((error)=>{
 
-app.listen(3000 , ()=>{
+    if(error){
+        console.log("some err in db " + error )
+    }
 
-    console.log("Server is Running on port 3000")
+    else{
+        console.log("Database is connected successfully !")
+    }
 
 })
 
+
+app.listen( port, ()=>{
+    console.log(`Server is Runing on port ${port}`)
+})

@@ -1,9 +1,12 @@
 import express from 'express'
-import { getuserController } from '../controllers/usercontroller.js'
+import { adduserController, getuserController, updateuserController } from '../controllers/usercontroller.js'
 
-let router  = express.Router()
+const router = express.Router()
 
-router.get('/' , getuserController)
+router.get('/user' , getuserController)
 
+router.post('/add' , adduserController)
+
+router.put('/update/:userid', updateuserController)
 
 export default router
