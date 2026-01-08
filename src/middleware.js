@@ -5,10 +5,9 @@ const app = express()
 
 app.use(express.json())
 
-app.use('/api', userRouter)
+app.use('/api' ,userRouter )
 
 app.use('/user' , userRouter)
 
-app.use('/data' , userRouter)
 
 export default app;

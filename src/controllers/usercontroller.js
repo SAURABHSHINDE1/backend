@@ -1,58 +1,38 @@
-import {adduser, getuser, updateuser} from '../models/usermodels.js'
-
-export const getuserController = async(req, res)=>{
-
-    try{
-
-        let result  =  await getuser()
-
-        res.json({success : true , Data : result})
-
-    }
-    catch(error){
-
-     res.json({success : false , message : error})
-
-    }
+import { adduser, getAlluser } from "../models/usermodels.js"
 
 
-}
+export const getuserController = async(req , res)=>{
 
-export const adduserController = async(req , res)=>{
-
-    let {id , name , salary , dept} = req.body
+    let {id} = req.params
 
     try{
 
-        let result = await adduser(id , name , salary , dept)
+        let result = await getAlluser(id)
 
-        res.json({success : true , message :"user Added successfully !"})
+        res.json({success : true , data : result})
 
     }
     catch(err){
-        res.json({success :false , Error :err})
+    
+        res.json({success : false , data : err})
     }
 
 }
 
-
-export const updateuserController =async(req ,res)=>{
+export const adduserContrller = async(req , res)=>{
 
     try{
+        let {id ,name , salary , dept} = req.body
 
-        let {userid} = req.params
+        let result = await adduser(id ,name , salary , dept)
 
-        let {id , name , salary , dept} = req.body
-
-
-        let result = await updateuser(id , name , salary , dept ,userid)
-
-        res.json({success : true , message:"user updated sucessfully !"})
+        res.json({success : true , message : "user added successfully ! "})
 
     }
     catch(err){
 
-        res.json({success:false , message:"some err " + err})
+         res.json({success : false , message : "some err will occur" , err})
 
     }
+
 }
